@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <title>Blue Div Box</title>
+    <style>
+        html,body{
+            width:100%;
+            height: 100%
+        }
+        body{
+    overflow: hidden;
+    background-image: url(img/bg.png),  linear-gradient(white, #abc8ff);
+    background-blend-mode: darken;
+    background-size: cover;
+    margin: 0;}
+        /* CSS styles for the div box */
+        .blue-box {
+            background-color: blue;
+            position: absolute;
+            transition: all 0.5s; /* Add a smooth transition effect */
+        }
+        .wrap{
+            width: 100px;
+            height: 130px;
+            position: absolute;
+            top: auto;
+            overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px #0000007a
+        }
+        img{
+            position: absolute;
+            height: 25px;
+        }
+        iframe{
+            border: none;
+            margin-top: 30px;
+            width: 100%;
+            height: calc(100% + 30px)
+        }
+    </style>
+    <script>
+
+            // popup_1_l = (Math.min($('.dot_lefteye').offset().left,$('.dot_leftfinger').offset().left)+popup_pre_1_l)/2
+            // popup_1_t = (Math.min($('.dot_lefteye').offset().top,$('.dot_leftfinger').offset().top)+popup_pre_1_t)/2
+            // popup_1_w = (Math.abs($('.dot_lefteye').offset().left - $('.dot_leftfinger').offset().left)+popup_pre_1_w)/2
+            // popup_1_h = (Math.abs($('.dot_lefteye').offset().top - $('.dot_leftfinger').offset().top)+popup_pre_1_h)/2
+
+        $(document).ready(function() {
+            var popup_array = []
+//             const options = "height=300,width=150,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,directories=no,status=no";
+// let cnt = 10; // for example
+
+// function popup() { 
+//  let w = window.open('test.html',"name"+cnt,options);
+//  if (!w) console.log("sorry, not allowed to pop");
+//  else { 
+//    cnt--;
+//    if (cnt>0) setTimeout(popup,1000); // pop the next
+//  }  
+// }
+// window.addEventListener("load",popup)
+
+var keyarray = [['Esc', 27,'false'], ['F1', 112,'false'], ['F2', 113,'false'], ['F3', 114,'false'], ['F4', 115,'false'], ['F5', 116,'false'], ['F6', 117,'false'], ['F7', 118,'false'], ['F8', 119,'false'], ['F9', 120,'false'], ['F10', 121,'false'], ['F11', 122,'false'], ['F12', 123,'false'], [' ,', 188,'false'], ['1', 49,'false'], ['2', 50,'false'], ['3', 51,'false'], ['4', 52,'false'], ['5', 53,'false'], ['6', 54,'false'], ['7', 55,'false'], ['8', 56,'false'], ['9', 57,'false'], ['0', 48,'false'], ['-', 189,'false'], ['=', 187,'false'], ['Delete', 46,'false'], ['Tab', 9,'false'], ['q', 81,'false'], ['w', 87,'false'], ['e', 69,'false'], ['r', 82,'false'], ['t', 84,'false'], ['y', 89,'false'], ['u', 85,'false'], ['i', 73,'false'], ['o', 79,'false'], ['p', 80,'false'], ['[ (Open Square Bracket)', 219,'false'], ['] (Close Square Bracket)', 221,'false'], ['\ (Backslash)', 220,'false'], ['Caps Lock', 20,'false'], ['a', 65,'false'], ['s', 83,'false'], ['d', 68,'false'], ['f', 70,'false'], ['g', 71,'false'], ['h', 72,'false'], ['j', 74,'false'], ['k', 75,'false'], ['l', 76,'false'], [';', 186,'false'], ['', 222,'false'], ['Enter', 13,'false'], ['Shift', 16,'false'], ['z', 90,'false'], ['x', 88,'false'], ['c', 67,'false'], ['v', 86,'false'], ['b', 66,'false'], ['n', 78,'false'], ['m', 77,'false'], [', (Comma)', 188,'false'], ['. (Period/Full Stop)', 190,'false'], ['/ (Forward Slash)', 191,'false'], ['Shift', 16]]
+var  keypos = [ [39.0, 35.7], [124.3, 35.7], [192.3, 35.7], [260.4, 35.7], [328.5, 35.7], [396.5, 35.7], [464.6, 35.7], [532.6, 35.7], [600.7, 35.7], [668.7, 35.7], [736.8, 35.7], [804.9, 35.7], [872.9, 35.7], [22.2, 101.6], [90.3, 101.6], [158.3, 101.6], [226.4, 101.6], [294.4, 101.6], [362.5, 101.6], [430.5, 101.6], [498.6, 101.6], [566.7, 101.6], [634.7, 101.6], [702.8, 101.6], [770.8, 101.6], [838.9, 101.6], [925.3, 101.6], [42.6, 167.6], [122.3, 167.6], [190.3, 167.6], [258.4, 167.6], [326.5, 167.6], [394.5, 167.6], [462.6, 167.6], [530.6, 167.6], [598.7, 167.6], [666.7, 167.6], [734.8, 167.6], [802.9, 167.6], [870.9, 167.6], [941.0, 167.6], [33.8, 233.5], [139.9, 233.5], [208.0, 233.5], [276.1, 233.5], [344.1, 233.5], [412.2, 233.5], [480.2, 233.5], [548.3, 233.5], [616.4, 233.5], [684.4, 233.5], [752.5, 233.5], [820.5, 233.5], [916.1, 233.5], [50.7, 299.5], [177.4, 299.5], [245.4, 299.5], [313.5, 299.5], [381.5, 299.5], [449.6, 299.5], [517.7, 299.5], [585.7, 299.5], [653.8, 299.5], [721.8, 299.5], [789.9, 299.5], [897.2, 299.5], [24.4, 365.4], [138.9, 365.4], [226.4, 365.4], [473.6, 365.4], [736.8, 365.4], [829.1, 365.4], [919.6, 365.4]]
+var counter = 0 
+var pressedkey = undefined
+var direction = undefined
+var timeout
+            function popup(left,keycode,direction) {
+                //init_left,bottom,counter,maxbottom,direction,margin-left,maxmarginleft
+                // if($('.keycode_'+keycode).length==0){
+                    for (var i = 0; i < 5; i++) {
+                        popup_array.push([left+Math.floor(Math.random()*50),0,0,Math.floor(Math.random()*500)+200,direction,0,undefined])
+                        if(direction === 'right'){
+                            popup_array[popup_array.length-1][6] = Math.floor(Math.random()*300)+300
+                        }else if(direction === 'left'){
+                            popup_array[popup_array.length-1][6] = -1*(Math.floor(Math.random()*300)+300)
+                        }else if(typeof(direction) === 'undefined'||direction === 'sm_right'||direction === 'sm_left'){
+                            if(i%2 == 0){
+                                console.log('11111111')
+                                direction = 'sm_right'
+                                popup_array[popup_array.length-1][6] = Math.floor(Math.random()*300)
+                            }else{
+                                console.log('22222222')
+                                direction = 'sm_left'
+                                popup_array[popup_array.length-1][6] = -1*(Math.floor(Math.random()*300))
+                            }
+                        }
+                        $("body").append('<div class="wrap keycode_'+keycode+' ah_'+(popup_array.length-1)+'"><img src="img/tab.png">')
+                        var iframe = $('<iframe>').css({
+                            'position': 'absolute',
+                            'width': '200px',
+                            'height': '100px',
+                            'left': '0'
+                        });
+                        $('.ah_'+(popup_array.length-1)).append(iframe);
+                        var iframeDoc = iframe[0].contentDocument;
+                        if (iframeDoc) {
+                            var image = $('<img>').attr('src', 'temp/img/menu.png').css('width', '30px');
+                            $('body', iframeDoc).append(image);
+                            $('body', iframeDoc).css('background-image', 'url("img/face-'+paddy(Math.floor(Math.random()*11)+1, 2)+'.png")');
+                            $('body', iframeDoc).css('background-size' , 'contain');
+                        }
+                        console.log(popup_array.length-1)
+                    }
+                    // }
+            }
+            function easeOut(x){
+                return Math.sin((x * Math.PI) / 2);
+            }
+            function easeIn(x){
+                return 1 - Math.cos((x * Math.PI) / 2);
+            }
+            function paddy(num, padlen, padchar) {
+    var pad_char = typeof padchar !== 'undefined' ? padchar : '0';
+    var pad = new Array(1 + padlen).join(pad_char);
+    return (pad + num).slice(-pad.length);
+}
+            function easeInOut_1(x){
+                if(x<0.5){
+                    var k = x*2
+                    return Math.sin((k * Math.PI) / 2);
+                }else{
+                    var k = 1-(x-0.5)*2
+                    return Math.sin((k * Math.PI) / 2);
+                }
+            }
+            function easeInOut_2(x){
+                if(x<0.5){
+                    var k = x*2
+                    return x;
+                }else{
+                    var k = (x-0.5)*2
+                    return x;
+                }
+            }
+            function easeInOut_3(x){
+                    var k = x-0.5
+                    return -1*k*k*4+1;
+            }
+            animate()
+
+            function animate(){
+                // console.log(popup_array)
+                for (var i = popup_array.length - 1; i >= 0; i--) {
+                //init_left,bottom,counter,maxbottom,direction,margin-left,maxmarginleft
+                    if(popup_array[i][2]<100&&popup_array[i][6]){
+                        popup_array[i][2]++
+                        popup_array[i][5] = (easeInOut_2((popup_array[i][2])/100)*(popup_array[i][6]))
+                        popup_array[i][1] = (easeInOut_3((popup_array[i][2])/100)*(popup_array[i][3]))
+                        if(popup_array.length>10){
+                                                if(i==10){
+                                                    console.log(popup_array[i][2])
+                                                    console.log(popup_array[i][6])
+                                                }
+                                            }
+                        $('.ah_'+i).css({'left':popup_array[i][0]+'px','margin-left':popup_array[i][5]+'px','bottom':popup_array[i][1]+'px'})
+                    }else{
+                        $('.ah_'+i).remove()
+                        // popup_array.splice(i, 1); 
+                    }
+                }
+                setTimeout(function(){
+                    animate()
+                },6)
+            }
+            function getRandomValueBetweenMinusOneAndOne() {
+              return Math.random() * 2 - 1; // Generates a random value between -1 and 1
+            }
+            $(document).on('keydown', function(e) {
+                clearTimeout(timeout);
+                timeout = setTimeout(function(){
+                    pressedkey = undefined
+                    direction = undefined
+                    },500);
+                for (var i = keyarray.length - 1; i >= 0; i--) {
+                    if(e.keyCode == keyarray[i][1]){
+                        keyarray[i][0][2] = true;
+                        if(pressedkey){
+                            if(keypos[i][0]<pressedkey){
+                                direction = 'right'
+                            }else if(keypos[i][0]>pressedkey){
+                                direction = 'left'
+                            }else{
+                                direction = 'undefined'
+                            }
+                        }
+                        pressedkey  = keypos[i][0]
+                        popup(keypos[i][0]/(925.3+68/2)*window.innerWidth,e.keyCode,direction)
+                    }else{
+                    }
+                }
+                counter++
+            });
+        });
+    </script>
+</head>
+<body  >
+    <!-- The blue div box -->
+    <div class="blue-box"></div>
+
+
+</body>
+</html>
