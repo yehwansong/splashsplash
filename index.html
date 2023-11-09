@@ -12,9 +12,10 @@
         }
         body{
     overflow: hidden;
-    background-image: url(img/bg.png),  linear-gradient(white, #abc8ff);
-    background-blend-mode: darken;
-    background-size: cover;
+    background-image:url(img/bg_n.jpeg), linear-gradient(#121e74,#253fff, #3c7efa);
+    background-blend-mode: overlay;
+    background-size: cover;g
+    background-repeat: repeat;
     margin: 0;}
         /* CSS styles for the div box */
         .blue-box {
@@ -24,22 +25,29 @@
         }
         .wrap{
             width: 100px;
-            height: 130px;
+            height: 120px;
             position: absolute;
             top: auto;
             overflow: hidden;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0px 0px 10px #0000007a
         }
+        .ah_1,.ah_6,.ah_10,.ah_14{
+            width: 70px;
+            height: 75px;}
+        .ah_3,.ah_9,.ah_15,.ah_21{
+            width: 120px;
+            height: 75px;}
         img{
             position: absolute;
-            height: 25px;
+            height: 20px;
         }
         iframe{
             border: none;
-            margin-top: 30px;
+            margin-top: 20px;
             width: 100%;
-            height: calc(100% + 30px)
+            height: calc(100% + 20px);
+            filter: saturate(1.5);
         }
     </style>
     <script>
@@ -97,15 +105,19 @@ var timeout
                             'height': '100px',
                             'left': '0'
                         });
-                        $('.ah_'+(popup_array.length-1)).append(iframe);
+                        $('.ah_'+(popup_array.length-1)).append(iframe)
+                        $('.ah_'+(popup_array.length-1)).css({
+                            'width':Math.floor(Math.random()*5)*10+70 + 'px',
+                            'height':Math.floor(Math.random()*5)*10+70 + 'px'
+                        });
                         var iframeDoc = iframe[0].contentDocument;
                         if (iframeDoc) {
-                            var image = $('<img>').attr('src', 'temp/img/menu.png').css('width', '30px');
+
+                            var image = $('<img>').attr('src', 'img/menu_'+(Math.floor(Math.random()*4)+1)+'.png').css('width', '20px').css('filter', 'invert(1)');
                             $('body', iframeDoc).append(image);
                             $('body', iframeDoc).css('background-image', 'url("img/face-'+paddy(Math.floor(Math.random()*11)+1, 2)+'.png")');
                             $('body', iframeDoc).css('background-size' , 'contain');
                         }
-                        console.log(popup_array.length-1)
                     }
                     // }
             }
